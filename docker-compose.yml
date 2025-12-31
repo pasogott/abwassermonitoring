@@ -1,0 +1,9 @@
+services:
+  abwasser:
+    build: .
+    volumes:
+      - ./output:/app/output
+      - ./config.yaml:/app/config.yaml:ro
+    environment:
+      - TZ=Europe/Vienna
+    restart: "no"

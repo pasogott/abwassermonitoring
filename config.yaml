@@ -1,0 +1,102 @@
+# Austrian Wastewater Monitoring Configuration
+
+data_sources:
+  # National Level - abwassermonitoring.at
+  regional:
+    url: "https://abwassermonitoring.at/cbe1/dl_blverlauf.csv"
+    delimiter: ";"
+    date_column: "Datum"
+    value_column: "Genkopien pro EW / Tag * 10^6"
+    group_column: "Gruppe"
+    encoding: "utf-8"
+
+  national:
+    url: "https://abwassermonitoring.at/cbe1/dl_natmon_01.csv"
+    delimiter: ";"
+    date_column: "Datum"
+    value_column: "Gesamtvirenfracht"
+    encoding: "utf-8"
+
+  variants:
+    url: "https://abwassermonitoring.at/cbe1/dl_natmon_variants.csv"
+    delimiter: ";"
+    date_column: "Datum"
+    encoding: "utf-8"
+
+  # Vienna Multi-Pathogen - ViennaViz API (stp.wien.gv.at)
+  vienna:
+    base_url: "https://stp.wien.gv.at/viennaviz/anonymous/chart"
+    delimiter: ";"
+    encoding: "utf-8"
+    charts:
+      sars_cov_2: "2cbc142d-d1c0-4c43-89f4-54e4d9d5223e"
+      influenza: "2a37abdb-544a-445e-bfd6-a2e8ecbaacdf"
+      rsv: "3bfafd07-8f89-47a7-877f-22d4ec4ac346"
+
+output:
+  directory: "./output"
+  date_folders: true
+  latest_symlink: true
+
+visualization:
+  # WhatsApp optimized dimensions
+  width: 1080
+  height: 1080
+  dpi: 150
+  font_family: "DejaVu Sans"
+
+  # Chart-specific settings
+  charts:
+    regional:
+      enabled: true
+      time_range_days: 90
+      chart_type: "stacked_area"
+      title: "SARS-CoV-2 Abwassermonitoring nach Bundesland"
+      subtitle: "Genkopien pro Einwohner/Tag (Millionen)"
+
+    trend:
+      enabled: true
+      time_range_days: 180
+      rolling_window: 7
+      title: "Nationale SARS-CoV-2 Virenlast"
+      subtitle: "7-Tage-Durchschnitt"
+
+    heatmap:
+      enabled: true
+      weeks: 52
+      colormap: "YlOrRd"
+      title: "Aktivitaet der letzten 52 Wochen"
+
+    vienna_pathogens:
+      enabled: true
+      time_range_days: 90
+      title: "Wien: Respiratorische Viren im Abwasser"
+
+# Color scheme for Bundeslaender
+bundeslaender:
+  Wien: "#E31A1C"
+  Niederoesterreich: "#FF7F00"
+  Oberoesterreich: "#FDBF6F"
+  Salzburg: "#33A02C"
+  Tirol: "#B2DF8A"
+  Vorarlberg: "#1F78B4"
+  Kaernten: "#A6CEE3"
+  Steiermark: "#6A3D9A"
+  Burgenland: "#CAB2D6"
+  Oesterreich: "#333333"
+
+# Color scheme for pathogens
+pathogens:
+  SARS-CoV-2: "#E31A1C"
+  Influenza_A: "#1F78B4"
+  Influenza_B: "#33A02C"
+  RSV: "#6A3D9A"
+
+# Styling
+style:
+  background: "#FFFFFF"
+  text: "#1A1A1A"
+  grid: "#E5E5E5"
+  title_size: 24
+  label_size: 14
+  tick_size: 12
