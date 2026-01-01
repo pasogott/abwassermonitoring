@@ -64,28 +64,24 @@ jobs:
           fi
 
           echo "Encoding chart as base64..."
-          CHART_BASE64=$(base64 -w0 "$CHART_PATH")
+          base64 -w0 "$CHART_PATH" > /tmp/image.b64
 
-          echo "Reading data JSON..."
-          DATA_JSON=$(cat "$DATA_PATH")
-
-          echo "Sending to n8n webhook..."
-
-          # Create JSON payload file with jq for proper escaping
+          echo "Building payload..."
           jq -n \
-            --arg image "$CHART_BASE64" \
+            --rawfile image /tmp/image.b64 \
             --arg filename "vienna_pathogens.png" \
             --arg generated_at "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
-            --argjson data "$DATA_JSON" \
+            --slurpfile data "$DATA_PATH" \
             '{
               image: $image,
               filename: $filename,
               generated_at: $generated_at,
-              data: $data
+              data: $data[0]
             }' > /tmp/payload.json
 
           echo "Payload size: $(wc -c < /tmp/payload.json) bytes"
 
+          echo "Sending to n8n webhook..."
           curl -X POST "$N8N_WEBHOOK_URL" \
             -H "Content-Type: application/json" \
             --data-binary @/tmp/payload.json \
