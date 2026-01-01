@@ -2,7 +2,14 @@
 
 Automated weekly visualization of respiratory virus levels in Vienna's wastewater, with year-over-year comparison.
 
-![Vienna Pathogens Chart](output/latest/vienna_pathogens.png)
+![Vienna Pathogens Chart](data/latest.png)
+
+## Public URLs
+
+After each weekly run, the latest files are available at:
+
+- **Chart:** `https://raw.githubusercontent.com/pasogott/abwassermonitoring/development/data/latest.png`
+- **Data:** `https://raw.githubusercontent.com/pasogott/abwassermonitoring/development/data/latest.json`
 
 ## What it does
 

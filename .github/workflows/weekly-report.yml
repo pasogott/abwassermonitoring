@@ -67,15 +67,22 @@ jobs:
           base64 -w0 "$CHART_PATH" > /tmp/image.b64
 
           echo "Building payload..."
+          IMAGE_URL="https://raw.githubusercontent.com/${{ github.repository }}/development/data/latest.png"
+          DATA_URL="https://raw.githubusercontent.com/${{ github.repository }}/development/data/latest.json"
+
           jq -n \
             --rawfile image /tmp/image.b64 \
             --arg filename "vienna_pathogens.png" \
             --arg generated_at "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+            --arg image_url "$IMAGE_URL" \
+            --arg data_url "$DATA_URL" \
             --slurpfile data "$DATA_PATH" \
             '{
               image: $image,
               filename: $filename,
               generated_at: $generated_at,
+              image_url: $image_url,
+              data_url: $data_url,
               data: $data[0]
             }' > /tmp/payload.json
 
@@ -89,6 +96,18 @@ jobs:
             --show-error
 
           echo "Payload sent successfully"
+
+      - name: Commit latest files to data folder
+        run: |
+          mkdir -p data
+          cp "${{ steps.find-files.outputs.chart_path }}" data/latest.png
+          cp "${{ steps.find-files.outputs.data_path }}" data/latest.json
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/latest.png data/latest.json
+          git commit -m "Update weekly report $(date +%Y-%m-%d)" || echo "No changes to commit"
+          git push
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
