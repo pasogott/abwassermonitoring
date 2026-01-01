@@ -2,6 +2,32 @@
 
 All notable changes to this project will be documented in this file.
 
+## 0.2.0 - 2026-01-01
+
+### Changed
+
+* Simplified output to Vienna-only 3-month trend chart with year-over-year comparison
+* Previous year shown as faded dashed line using calendar week alignment
+* Shared legend below chart title showing current and previous year
+* Endpoint dots on current values for visual clarity
+
+### Added
+
+* GitHub Action for weekly automated runs (Monday 03:00 CET)
+* Webhook integration with n8n for messaging automation
+* JSON data export with statistics, week-over-week, and year-over-year changes
+* Public URLs for chart and data via `data/latest.png` and `data/latest.json`
+* n8n AI prompts documentation for personalized summaries
+* uv caching in CI for faster builds
+
+### Removed
+
+* Regional comparison charts
+* National trend charts
+* Calendar heatmap visualization
+* Season labels and year annotations
+* Docker support files
+
 ## 0.1.0 - 2025-12-31
 
 ### Added
