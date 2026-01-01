@@ -68,7 +68,7 @@ jobs:
 
           echo "Sending to n8n webhook..."
 
-          # Create JSON payload with jq for proper escaping
+          # Create JSON payload file with jq for proper escaping
           jq -n \
             --arg image "$CHART_BASE64" \
             --arg filename "vienna_pathogens.png" \
@@ -79,12 +79,15 @@ jobs:
               filename: $filename,
               generated_at: $generated_at,
               data: $data
-            }' | curl -X POST "$N8N_WEBHOOK_URL" \
-              -H "Content-Type: application/json" \
-              -d @- \
-              --fail \
-              --silent \
-              --show-error
+            }' > /tmp/payload.json
+
+          echo "Payload size: $(wc -c < /tmp/payload.json) bytes"
+
+          curl -X POST "$N8N_WEBHOOK_URL" \
+            -H "Content-Type: application/json" \
+            --data-binary @/tmp/payload.json \
+            --fail \
+            --show-error
 
           echo "Payload sent successfully"
 
