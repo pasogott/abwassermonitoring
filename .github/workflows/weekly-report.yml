@@ -63,23 +63,16 @@ jobs:
             exit 1
           fi
 
-          echo "Encoding chart as base64..."
-          base64 -w0 "$CHART_PATH" > /tmp/image.b64
-
           echo "Building payload..."
           IMAGE_URL="https://raw.githubusercontent.com/${{ github.repository }}/development/data/latest.png"
           DATA_URL="https://raw.githubusercontent.com/${{ github.repository }}/development/data/latest.json"
 
           jq -n \
-            --rawfile image /tmp/image.b64 \
-            --arg filename "vienna_pathogens.png" \
             --arg generated_at "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
             --arg image_url "$IMAGE_URL" \
             --arg data_url "$DATA_URL" \
             --slurpfile data "$DATA_PATH" \
             '{
-              image: $image,
-              filename: $filename,
               generated_at: $generated_at,
               image_url: $image_url,
               data_url: $data_url,
