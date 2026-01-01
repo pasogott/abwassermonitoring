@@ -1,0 +1,72 @@
+name: Weekly Vienna Pathogen Report
+
+on:
+  schedule:
+    # Every Monday at 02:00 UTC (03:00 CET / 04:00 CEST)
+    - cron: '0 2 * * 1'
+  workflow_dispatch:
+    # Allow manual trigger for testing
+
+jobs:
+  generate-and-send:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+        with:
+          version: "latest"
+
+      - name: Set up Python
+        run: uv python install 3.12
+
+      - name: Install dependencies
+        run: uv sync
+
+      - name: Generate Vienna pathogen chart
+        run: uv run python -m abwasser
+
+      - name: Find generated chart
+        id: find-chart
+        run: |
+          CHART_PATH=$(find output -name "vienna_pathogens.png" -type f | head -1)
+          echo "chart_path=$CHART_PATH" >> $GITHUB_OUTPUT
+          echo "Found chart at: $CHART_PATH"
+
+      - name: Send chart to n8n webhook
+        env:
+          N8N_WEBHOOK_URL: ${{ secrets.N8N_WEBHOOK_URL }}
+        run: |
+          if [ -z "$N8N_WEBHOOK_URL" ]; then
+            echo "Error: N8N_WEBHOOK_URL secret not set"
+            exit 1
+          fi
+
+          CHART_PATH="${{ steps.find-chart.outputs.chart_path }}"
+
+          if [ ! -f "$CHART_PATH" ]; then
+            echo "Error: Chart not found at $CHART_PATH"
+            exit 1
+          fi
+
+          echo "Sending $CHART_PATH to n8n webhook..."
+
+          curl -X POST "$N8N_WEBHOOK_URL" \
+            -F "file=@$CHART_PATH" \
+            -F "filename=vienna_pathogens.png" \
+            -F "generated_at=$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+            --fail \
+            --silent \
+            --show-error
+
+          echo "Chart sent successfully"
+
+      - name: Upload chart as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: vienna-pathogens-${{ github.run_number }}
+          path: ${{ steps.find-chart.outputs.chart_path }}
+          retention-days: 30
