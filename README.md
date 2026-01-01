@@ -98,6 +98,15 @@ return {
 };
 ```
 
+## AI Summary Generation
+
+The JSON data is structured for AI analysis. See **[docs/n8n-ai-prompts.md](docs/n8n-ai-prompts.md)** for ready-to-use prompts that generate friendly weekly summaries.
+
+Example workflow:
+1. Webhook receives data from GitHub Actions
+2. AI Agent analyzes trends and changes
+3. Sends personalized message with chart to Telegram/Signal
+
 ## Data Sources
 
 - [Stadt Wien Open Data - Abwassermonitoring](https://www.data.gv.at/katalog/dataset/stadt-wien_abwassermonitoringwien)
