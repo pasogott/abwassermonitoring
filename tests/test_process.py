@@ -1,17 +1,18 @@
 """Tests for data processing module."""
 
 import pandas as pd
-import pytest
 
 from abwasser import process
 
 
 def test_parse_dates():
     """Test date parsing."""
-    df = pd.DataFrame({
-        "date": ["2024-01-01", "2024-01-02", "2024-01-03"],
-        "value": [1, 2, 3],
-    })
+    df = pd.DataFrame(
+        {
+            "date": ["2024-01-01", "2024-01-02", "2024-01-03"],
+            "value": [1, 2, 3],
+        }
+    )
 
     result = process.parse_dates(df)
 
@@ -37,7 +38,9 @@ def test_prepare_regional_data(sample_regional_data):
 
 def test_prepare_trend_data(sample_national_data):
     """Test trend data preparation."""
-    result = process.prepare_trend_data(sample_national_data, days=365, rolling_window=7)
+    result = process.prepare_trend_data(
+        sample_national_data, days=365, rolling_window=7
+    )
 
     # Should have rolling_avg column
     assert "rolling_avg" in result.columns
@@ -57,10 +60,12 @@ def test_calculate_statistics(sample_national_data):
 
 def test_normalize_region_names():
     """Test region name normalization."""
-    df = pd.DataFrame({
-        "region": ["Wien", "Niederösterreich", "Kärnten"],
-        "value": [1, 2, 3],
-    })
+    df = pd.DataFrame(
+        {
+            "region": ["Wien", "Niederösterreich", "Kärnten"],
+            "value": [1, 2, 3],
+        }
+    )
 
     result = process.normalize_region_names(df)
 
