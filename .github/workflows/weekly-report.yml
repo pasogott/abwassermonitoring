@@ -7,6 +7,9 @@ on:
   workflow_dispatch:
     # Allow manual trigger for testing
 
+permissions:
+  contents: write
+
 jobs:
   generate-and-send:
     runs-on: ubuntu-latest
