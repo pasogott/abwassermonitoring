@@ -21,6 +21,7 @@ jobs:
           version: "latest"
           enable-cache: true
           cache-dependency-glob: "**/uv.lock"
+          ignore-nothing-to-cache: true
 
       - name: Set up Python
         run: uv python install 3.12

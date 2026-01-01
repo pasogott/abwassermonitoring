@@ -24,7 +24,9 @@
       "Bash(gh repo create:*)",
       "Bash(uv run ruff format:*)",
       "WebFetch(domain:community.n8n.io)",
-      "WebFetch(domain:prosperasoft.com)"
+      "WebFetch(domain:prosperasoft.com)",
+      "Bash(gh run list:*)",
+      "Bash(xargs:*)"
     ]
   }
 }
