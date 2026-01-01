@@ -26,17 +26,19 @@ jobs:
       - name: Install dependencies
         run: uv sync
 
-      - name: Generate Vienna pathogen chart
+      - name: Generate Vienna pathogen chart and data
         run: uv run python -m abwasser
 
-      - name: Find generated chart
-        id: find-chart
+      - name: Find generated files
+        id: find-files
         run: |
-          CHART_PATH=$(find output -name "vienna_pathogens.png" -type f | head -1)
-          echo "chart_path=$CHART_PATH" >> $GITHUB_OUTPUT
-          echo "Found chart at: $CHART_PATH"
+          OUTPUT_DIR=$(find output -type d -name "20*" | sort -r | head -1)
+          echo "output_dir=$OUTPUT_DIR" >> $GITHUB_OUTPUT
+          echo "chart_path=$OUTPUT_DIR/vienna_pathogens.png" >> $GITHUB_OUTPUT
+          echo "data_path=$OUTPUT_DIR/vienna_data.json" >> $GITHUB_OUTPUT
+          echo "Found output directory: $OUTPUT_DIR"
 
-      - name: Send chart to n8n webhook
+      - name: Send to n8n webhook (Base64 JSON)
         env:
           N8N_WEBHOOK_URL: ${{ secrets.N8N_WEBHOOK_URL }}
         run: |
@@ -45,28 +47,52 @@ jobs:
             exit 1
           fi
 
-          CHART_PATH="${{ steps.find-chart.outputs.chart_path }}"
+          CHART_PATH="${{ steps.find-files.outputs.chart_path }}"
+          DATA_PATH="${{ steps.find-files.outputs.data_path }}"
 
           if [ ! -f "$CHART_PATH" ]; then
             echo "Error: Chart not found at $CHART_PATH"
             exit 1
           fi
 
-          echo "Sending $CHART_PATH to n8n webhook..."
+          if [ ! -f "$DATA_PATH" ]; then
+            echo "Error: Data file not found at $DATA_PATH"
+            exit 1
+          fi
 
-          curl -X POST "$N8N_WEBHOOK_URL" \
-            -F "file=@$CHART_PATH" \
-            -F "filename=vienna_pathogens.png" \
-            -F "generated_at=$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
-            --fail \
-            --silent \
-            --show-error
+          echo "Encoding chart as base64..."
+          CHART_BASE64=$(base64 -w0 "$CHART_PATH")
 
-          echo "Chart sent successfully"
+          echo "Reading data JSON..."
+          DATA_JSON=$(cat "$DATA_PATH")
 
-      - name: Upload chart as artifact
+          echo "Sending to n8n webhook..."
+
+          # Create JSON payload with jq for proper escaping
+          jq -n \
+            --arg image "$CHART_BASE64" \
+            --arg filename "vienna_pathogens.png" \
+            --arg generated_at "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+            --argjson data "$DATA_JSON" \
+            '{
+              image: $image,
+              filename: $filename,
+              generated_at: $generated_at,
+              data: $data
+            }' | curl -X POST "$N8N_WEBHOOK_URL" \
+              -H "Content-Type: application/json" \
+              -d @- \
+              --fail \
+              --silent \
+              --show-error
+
+          echo "Payload sent successfully"
+
+      - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: vienna-pathogens-${{ github.run_number }}
-          path: ${{ steps.find-chart.outputs.chart_path }}
+          name: vienna-report-${{ github.run_number }}
+          path: |
+            ${{ steps.find-files.outputs.chart_path }}
+            ${{ steps.find-files.outputs.data_path }}
           retention-days: 30

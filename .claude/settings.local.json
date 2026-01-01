@@ -1,0 +1,30 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.data.gv.at)",
+      "WebFetch(domain:abwasser.ages.at)",
+      "WebSearch",
+      "WebFetch(domain:abwassermonitoring.at)",
+      "WebFetch(domain:stp.wien.gv.at)",
+      "WebFetch(domain:www.wien.gv.at)",
+      "WebFetch(domain:data.wien.gv.at)",
+      "Bash(uv init:*)",
+      "Bash(uv sync:*)",
+      "Bash(uv run python:*)",
+      "Bash(uv run ruff check:*)",
+      "Skill(frontend-design)",
+      "Bash(# Check the abwassermonitoring.at site for more endpoints echo \"\"=== Exploring abwassermonitoring.at for additional data sources ===\"\" curl -sL \"\"https://abwassermonitoring.at/\"\")",
+      "Bash(sort -u echo \"\" echo \"=== Checking for Vienna-specific data on national site ===\" curl -sL \"https://abwassermonitoring.at/cbe1/\")",
+      "Bash(git describe:*)",
+      "Bash(git tag:*)",
+      "Bash(git branch:*)",
+      "Bash(git checkout:*)",
+      "Bash(git reset:*)",
+      "Bash(gh auth status:*)",
+      "Bash(gh repo create:*)",
+      "Bash(uv run ruff format:*)",
+      "WebFetch(domain:community.n8n.io)",
+      "WebFetch(domain:prosperasoft.com)"
+    ]
+  }
+}
