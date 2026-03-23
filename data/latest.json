@@ -1,27 +1,23 @@
 {
-  "generated_at": "2026-03-16T03:06:59.830223",
+  "generated_at": "2026-03-23T03:06:05.729424",
   "period": {
-    "start": "2025-12-14",
-    "end": "2026-03-08"
+    "start": "2025-12-21",
+    "end": "2026-03-15"
   },
   "pathogens": {
     "SARS-CoV-2": {
-      "current_value": 63858708318608.05,
-      "current_date": "2026-03-08",
+      "current_value": 27716983086320.348,
+      "current_date": "2026-03-15",
       "unit": "Genkopien/Tag",
       "week_over_week_change_percent": null,
-      "year_over_year_change_percent": 24.6,
-      "previous_year_value": 51261327550380.89,
+      "year_over_year_change_percent": -7.0,
+      "previous_year_value": 29799265591236.57,
       "statistics": {
-        "min": 62283295482163.89,
-        "max": 359200276991195.9,
-        "mean": 139727482076329.97
+        "min": 27716983086320.348,
+        "max": 303679989482297.06,
+        "mean": 114228767160570.28
       },
       "time_series": [
-        {
-          "date": "2025-12-14",
-          "value": 359200276991195.9
-        },
         {
           "date": "2025-12-21",
           "value": 264222602195925.88
@@ -69,26 +65,26 @@
         {
           "date": "2026-03-08",
           "value": 63858708318608.05
+        },
+        {
+          "date": "2026-03-15",
+          "value": 27716983086320.348
         }
       ]
     },
     "Influenza": {
-      "current_value": 1129636759321.3967,
-      "current_date": "2026-03-08",
+      "current_value": 6298477219615.654,
+      "current_date": "2026-03-15",
       "unit": "Genkopien/Tag",
       "week_over_week_change_percent": null,
-      "year_over_year_change_percent": -98.6,
-      "previous_year_value": 80209944611947.0,
+      "year_over_year_change_percent": -83.0,
+      "previous_year_value": 37021523960894.445,
       "statistics": {
         "min": 1129636759321.3967,
         "max": 183185218423938.47,
-        "mean": 44418944580330.016
+        "mean": 38685550643687.266
       },
       "time_series": [
-        {
-          "date": "2025-12-14",
-          "value": 80832598395971.3
-        },
         {
           "date": "2025-12-21",
           "value": 70008953333365.57
@@ -136,26 +132,26 @@
         {
           "date": "2026-03-08",
           "value": 1129636759321.3967
+        },
+        {
+          "date": "2026-03-15",
+          "value": 6298477219615.654
         }
       ]
     },
     "RSV": {
-      "current_value": 19453225231950.285,
-      "current_date": "2026-03-08",
+      "current_value": 11030227962923.406,
+      "current_date": "2026-03-15",
       "unit": "Genkopien/Tag",
       "week_over_week_change_percent": null,
-      "year_over_year_change_percent": -54.6,
-      "previous_year_value": 42869544220870.6,
+      "year_over_year_change_percent": -55.6,
+      "previous_year_value": 24868841647959.246,
       "statistics": {
         "min": 3797004560165.607,
         "max": 34360500000000.0,
-        "mean": 15006040138702.117
+        "mean": 15288605062358.25
       },
       "time_series": [
-        {
-          "date": "2025-12-14",
-          "value": 7356883955393.698
-        },
         {
           "date": "2025-12-21",
           "value": 10274041203467.936
@@ -203,6 +199,10 @@
         {
           "date": "2026-03-08",
           "value": 19453225231950.285
+        },
+        {
+          "date": "2026-03-15",
+          "value": 11030227962923.406
         }
       ]
     }
