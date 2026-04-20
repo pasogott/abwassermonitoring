@@ -1,35 +1,23 @@
 {
-  "generated_at": "2026-03-30T03:06:58.535254",
+  "generated_at": "2026-04-20T03:07:32.567051",
   "period": {
-    "start": "2025-12-28",
-    "end": "2026-03-22"
+    "start": "2026-01-18",
+    "end": "2026-04-12"
   },
   "pathogens": {
     "SARS-CoV-2": {
-      "current_value": 21026755472278.1,
-      "current_date": "2026-03-22",
+      "current_value": 3896782014527.716,
+      "current_date": "2026-04-12",
       "unit": "Genkopien/Tag",
       "week_over_week_change_percent": null,
-      "year_over_year_change_percent": -32.4,
-      "previous_year_value": 31115929155154.44,
+      "year_over_year_change_percent": -95.0,
+      "previous_year_value": 78476234746429.66,
       "statistics": {
-        "min": 21026755472278.1,
-        "max": 303679989482297.06,
-        "mean": 95521394335674.28
+        "min": 3896782014527.716,
+        "max": 127072682605530.23,
+        "mean": 56383837992567.305
       },
       "time_series": [
-        {
-          "date": "2025-12-28",
-          "value": 303679989482297.06
-        },
-        {
-          "date": "2026-01-04",
-          "value": 118946847127512.64
-        },
-        {
-          "date": "2026-01-11",
-          "value": 116562178194854.34
-        },
         {
           "date": "2026-01-18",
           "value": 127072682605530.23
@@ -69,34 +57,34 @@
         {
           "date": "2026-03-22",
           "value": 21026755472278.1
+        },
+        {
+          "date": "2026-03-29",
+          "value": 13012919302467.182
+        },
+        {
+          "date": "2026-04-05",
+          "value": 13491081027278.18
+        },
+        {
+          "date": "2026-04-12",
+          "value": 3896782014527.716
         }
       ]
     },
     "Influenza": {
-      "current_value": null,
-      "current_date": "2026-03-22",
+      "current_value": 1163744855017.3271,
+      "current_date": "2026-04-12",
       "unit": "Genkopien/Tag",
       "week_over_week_change_percent": null,
-      "year_over_year_change_percent": null,
-      "previous_year_value": 18827237971590.94,
+      "year_over_year_change_percent": -88.5,
+      "previous_year_value": 10089801610255.242,
       "statistics": {
         "min": 0.0,
-        "max": 183185218423938.47,
-        "mean": 33300246541120.688
+        "max": 44179328456686.92,
+        "mean": 9633184536083.158
       },
       "time_series": [
-        {
-          "date": "2025-12-28",
-          "value": 183185218423938.47
-        },
-        {
-          "date": "2026-01-04",
-          "value": 77238212420462.75
-        },
-        {
-          "date": "2026-01-11",
-          "value": 53358981658623.53
-        },
         {
           "date": "2026-01-18",
           "value": 44179328456686.92
@@ -136,30 +124,34 @@
         {
           "date": "2026-03-22",
           "value": 0.0
+        },
+        {
+          "date": "2026-03-29",
+          "value": 2819125374788.809
+        },
+        {
+          "date": "2026-04-05",
+          "value": 2127736207730.7292
+        },
+        {
+          "date": "2026-04-12",
+          "value": 1163744855017.3271
         }
       ]
     },
     "RSV": {
-      "current_value": 6287400553893.507,
-      "current_date": "2026-03-22",
+      "current_value": 4896436428349.286,
+      "current_date": "2026-04-05",
       "unit": "Genkopien/Tag",
       "week_over_week_change_percent": null,
-      "year_over_year_change_percent": -64.0,
-      "previous_year_value": 17481760834704.43,
+      "year_over_year_change_percent": -78.2,
+      "previous_year_value": 22512295764000.0,
       "statistics": {
-        "min": 3797004560165.607,
+        "min": 4229675375378.6953,
         "max": 34360500000000.0,
-        "mean": 14981940397006.371
+        "mean": 15605926225574.902
       },
       "time_series": [
-        {
-          "date": "2025-12-28",
-          "value": 9775420153182.668
-        },
-        {
-          "date": "2026-01-04",
-          "value": 3797004560165.607
-        },
         {
           "date": "2026-01-11",
           "value": 4229675375378.6953
@@ -203,6 +195,14 @@
         {
           "date": "2026-03-22",
           "value": 6287400553893.507
+        },
+        {
+          "date": "2026-03-29",
+          "value": 16787804056389.88
+        },
+        {
+          "date": "2026-04-05",
+          "value": 4896436428349.286
         }
       ]
     }
