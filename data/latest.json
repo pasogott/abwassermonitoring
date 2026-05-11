@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-04T03:09:04.728956",
+  "generated_at": "2026-05-11T03:10:37.724486",
   "period": {
     "start": "2026-02-01",
     "end": "2026-04-26"
@@ -73,22 +73,18 @@
       ]
     },
     "Influenza": {
-      "current_value": 1139323539610.6643,
-      "current_date": "2026-04-26",
+      "current_value": 1086703446394.1238,
+      "current_date": "2026-05-03",
       "unit": "Genkopien/Tag",
       "week_over_week_change_percent": null,
-      "year_over_year_change_percent": null,
-      "previous_year_value": null,
+      "year_over_year_change_percent": -59.0,
+      "previous_year_value": 2651692123747.5283,
       "statistics": {
         "min": 0.0,
         "max": 19607950854684.64,
-        "mean": 5081515090756.78
+        "mean": 4032264532840.7993
       },
       "time_series": [
-        {
-          "date": "2026-02-01",
-          "value": 14726960699301.867
-        },
         {
           "date": "2026-02-08",
           "value": 19607950854684.64
@@ -136,26 +132,26 @@
         {
           "date": "2026-04-26",
           "value": 1139323539610.6643
+        },
+        {
+          "date": "2026-05-03",
+          "value": 1086703446394.1238
         }
       ]
     },
     "RSV": {
-      "current_value": 1057943286781.3312,
-      "current_date": "2026-04-26",
+      "current_value": 2064030896560.268,
+      "current_date": "2026-05-03",
       "unit": "Genkopien/Tag",
       "week_over_week_change_percent": null,
-      "year_over_year_change_percent": -84.0,
-      "previous_year_value": 6597491303763.873,
+      "year_over_year_change_percent": -16.2,
+      "previous_year_value": 2462285543479.848,
       "statistics": {
         "min": 1057943286781.3312,
         "max": 34360500000000.0,
-        "mean": 14288255159727.762
+        "mean": 13960421651726.645
       },
       "time_series": [
-        {
-          "date": "2026-02-01",
-          "value": 6325866500574.758
-        },
         {
           "date": "2026-02-08",
           "value": 26358632029078.324
@@ -203,6 +199,10 @@
         {
           "date": "2026-04-26",
           "value": 1057943286781.3312
+        },
+        {
+          "date": "2026-05-03",
+          "value": 2064030896560.268
         }
       ]
     }
